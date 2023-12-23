@@ -202,10 +202,7 @@ async function Jarvis() {
         }
       });
     }
-    if (_0x4ce977 === "close" && _0x1e43bc && _0x1e43bc.error && _0x1e43bc.error.output.statusCode != 401) {
-      console.log("rescan now");
-      Jarvis();
-    }
+    
   });
 }
 setTimeout(() => {
@@ -213,3 +210,4 @@ setTimeout(() => {
 }, 6000);
 
 
+  
