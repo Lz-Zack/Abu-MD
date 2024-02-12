@@ -144,7 +144,7 @@ async function connect(_0x49df9d) {
 		const {
 			state,
 			saveCreds
-		} = await useMultiFileAuthState(__dirname + '/auth_info_baileys');
+		} = await useMultiFileAuthState('./auth_info_baileys/');
 		const logger = pino({
 			level: "silent"
 		});
