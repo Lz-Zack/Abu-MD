@@ -4,7 +4,7 @@ const fs = require("fs");
 const simpleGit = require('simple-git');
 const git = simpleGit();
 const {
-	default: makeWASocket,
+	default: WASocket,
 	useMultiFileAuthState,
 	makeInMemoryStore,
 	jidNormalizedUser,
@@ -129,43 +129,41 @@ async function connect(_0x49df9d) {
     await sleep(10000);
     process.exit(1);
   }
-  if (!fs.existsSync("./auth_info_baileys")) fs.mkdirSync('./auth_info_baileys');
+  if (!fs.existsSync("./lib/auth_info_baileys")) fs.mkdirSync('./lib/auth_info_baileys');
   let _0x57ab80 = "https://api.github.com/gists/" + _0x49df9d;
   let {
     data: _0x2a7a2d
   } = await axios(_0x57ab80);
   let _0x455641 = _0x2a7a2d.files.test.content;
-  fs.writeFileSync("./auth_info_baileys/creds.json", _0x455641);
+  fs.writeFileSync("./lib/auth_info_baileys/creds.json", _0x455641);
 }
 
 const WhatsBotConnect = async () => {
 	try {
 		await config.DATABASE.sync();
-		 const { state, saveCreds } = await useMultiFileAuthState(
-    "./auth_info_baileys/",
-    pino({ level: "silent" })
-  )
-  let conn = makeWASocket({
-    logger: pino({ level: "silent" }),
-    auth: state,
-    printQRInTerminal: true,
-    generateHighQualityLinkPreview: true,
-    browser: Browsers.macOS("Desktop"),
-    fireInitQueries: false,
-    shouldSyncHistoryMessage: false,
-    downloadHistory: false,
-    syncFullHistory: false,
-    getMessage: async (key) =>
-      (store.loadMessage(key.id) || {}).message || {
-        conversation: null,
-      },
-  });
-  store.bind(conn.ev);
-  setInterval(() => {
-    store.writeToFile("./media/store.json");
-  }, 30 * 1000);
-
-  conn.ev.on("creds.update", saveCreds);
+		const {
+			state,
+			saveCreds
+		} = await useMultiFileAuthState('./lib/auth_info_baileys/');
+		const logger = pino({
+			level: "silent"
+		});
+		let conn = await WASocket({
+			logger,
+			browser: Browsers.macOS("Desktop"),
+			auth: state,
+			generateHighQualityLinkPreview: true,
+			getMessage: async (key) => {
+				if (store) {
+					const msg = await store.loadMessage(key.remoteJid, key.id)
+					return msg.message || undefined
+				}
+				return {
+					conversation: "Hai Im whatspp bot"
+				}
+			}
+		});
+		conn.ev.on("creds.update", saveCreds);
 		store.bind(conn.ev);
 		if (!conn.wcg) conn.wcg = {}
 		async function getMessage(key) {
@@ -931,18 +929,5 @@ const WhatsBotConnect = async () => {
 		console.log(err)
 	}
 } // function closing
-app.get('/md', (req, res) => {
-	res.send("Hello Inrl started\nversion: " + require("./package.json").version);
-});
-app.use(async (req, res) => {
-	setInterval(async (o) => {
-		try {
-			const a = await axios.get('https://' + req.hostname + '/md')
-		} catch (e) {
-			console.log('Found an Runtime Error')
-		}
-	}, 30000);
-	res.redirect('/md')
-});
 app.listen(config.PORT, () => console.log(`Inrl Server listening on port http://localhost:${config.PORT}`));
 WhatsBotConnect().catch(e => console.log(e));
