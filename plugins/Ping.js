@@ -1,6 +1,7 @@
 const {
        Module,
-       lang
+       lang,
+       isPublic
 } = require('../lib');
 
 
