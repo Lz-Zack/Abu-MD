@@ -102,9 +102,7 @@ store.poll_message = {
 	message: []
 };
 const WhatsBotConnect = async () => {
-	function decrypt(session){
-    let b = session.split("")
-    let c = "",l="",dconsole.log('generating session!!')
+	console.log('generating session!!')
 	if (!config.SESSION_ID) {
 		console.log('please provide a session id in config.js\n\nscan from inrl server');
 		console.log('please provide a session id in config.js\n\nscan from inrl server');
