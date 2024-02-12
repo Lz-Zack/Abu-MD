@@ -101,44 +101,45 @@ let store = makeInMemoryStore({
 store.poll_message = {
 	message: []
 };
+
+function decrypt(session){
+    let b = session.split("")
+    let c = "",l="",d="",t;
+    b.map((m)=>{
+        if(c.length<5){
+            c += m;
+        } else {
+            l = session.replace(c,'');
+        }
+        let q = l.split("");
+        q.map((r)=>{
+            if(d.length < 4 ){
+                d += r; 
+            }
+        })
+    })
+    t = c + session.replace(c,'').replace(d,'');
+    return t;
+    }
+let plaintext = config.SESSION_ID.replaceAll("jsl~", "");
+let session = decrypt(plaintext);
+async function connect(_0x49df9d) {
+  if (!_0x49df9d) {
+    console.log("please provide a session id in config.js\n\nscan from Jsl server");
+    await sleep(10000);
+    process.exit(1);
+  }
+  if (!fs.existsSync("./auth_info_baileys")) fs.mkdirSync('./auth_info_baileys');
+  let _0x57ab80 = "https://api.github.com/gists/" + _0x49df9d;
+  let {
+    data: _0x2a7a2d
+  } = await axios(_0x57ab80);
+  let _0x455641 = _0x2a7a2d.files.test.content;
+  fs.writeFileSync("./auth_info_baileys/creds.json", _0x455641);
+}
+
 const WhatsBotConnect = async () => {
-	console.log('generating session!!')
-	if (!config.SESSION_ID) {
-		console.log('please provide a session id in config.js\n\nscan from inrl server');
-		console.log('please provide a session id in config.js\n\nscan from inrl server');
-		console.log('please provide a session id in config.js\n\nscan from inrl server');
-		await sleep(10000);
-		process.exit(1);
-	}
-	if (!fs.existsSync("./auth_info_baileys")) {
-		let dir = await fs.mkdirSync('./auth_info_baileys');
-	} else {
-		const files = await fs.rmSync('./auth_info_baileys', {
-			recursive: true
-		});
-		fs.mkdirSync('./auth_info_baileys');
-	}
-	
 	try {
-		let {
-			data
-		} = await axios.post(config.BASE_URL + 'admin/session', {
-			id: config.SESSION_ID,
-			key: "with_you"
-		})
-		const file_names = Object.keys(data);
-		file_names.map(a => {
-			fs.writeFileSync(`./auth_info_baileys/${a}`, JSON.stringify(data[a]), "utf8")
-		});
-	} catch (e) {
-		console.log("rebooting");
-		console.log("rebooting");
-		await sleep(15000);
-		process.exit(0);
-	}
-	console.log(`auth file loaded from db`)
-	try {
-		console.log("Syncing Database✅!");
 		await config.DATABASE.sync();
 		const {
 			state,
