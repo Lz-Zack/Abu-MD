@@ -4,7 +4,7 @@ const fs = require("fs");
 const simpleGit = require('simple-git');
 const git = simpleGit();
 const {
-	default: WASocket,
+	default: makeWASocket,
 	useMultiFileAuthState,
 	makeInMemoryStore,
 	jidNormalizedUser,
@@ -141,29 +141,31 @@ async function connect(_0x49df9d) {
 const WhatsBotConnect = async () => {
 	try {
 		await config.DATABASE.sync();
-		const {
-			state,
-			saveCreds
-		} = await useMultiFileAuthState('./auth_info_baileys/');
-		const logger = pino({
-			level: "silent"
-		});
-		let conn = await WASocket({
-			logger,
-			browser: Browsers.macOS("Desktop"),
-			auth: state,
-			generateHighQualityLinkPreview: true,
-			getMessage: async (key) => {
-				if (store) {
-					const msg = await store.loadMessage(key.remoteJid, key.id)
-					return msg.message || undefined
-				}
-				return {
-					conversation: "Hai Im whatspp bot"
-				}
-			}
-		});
-		conn.ev.on("creds.update", saveCreds);
+		 const { state, saveCreds } = await useMultiFileAuthState(
+    "./auth_info_baileys/",
+    pino({ level: "silent" })
+  )
+  let conn = makeWASocket({
+    logger: pino({ level: "silent" }),
+    auth: state,
+    printQRInTerminal: true,
+    generateHighQualityLinkPreview: true,
+    browser: Browsers.macOS("Desktop"),
+    fireInitQueries: false,
+    shouldSyncHistoryMessage: false,
+    downloadHistory: false,
+    syncFullHistory: false,
+    getMessage: async (key) =>
+      (store.loadMessage(key.id) || {}).message || {
+        conversation: null,
+      },
+  });
+  store.bind(conn.ev);
+  setInterval(() => {
+    store.writeToFile("./media/store.json");
+  }, 30 * 1000);
+
+  conn.ev.on("creds.update", saveCreds);
 		store.bind(conn.ev);
 		if (!conn.wcg) conn.wcg = {}
 		async function getMessage(key) {
