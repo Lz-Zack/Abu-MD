@@ -2,11 +2,10 @@
   "name": "Abu-MD",
   "version": "4.1.1",
   "description": "WhatsApp bot made with nodejs and baileys",
-  "main": "index.js",
-  "scripts": {
-    "start": "pm2 start . --attach --name bot",
-    "stop": "pm2 stop bot"
-  },
+  "main": "./index.js",
+   "scripts": {
+    "start": "supervisor -s index.js"
+   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Afx-Abu/Abu-MD.git test"
@@ -42,6 +41,7 @@
     "qrcode-reader": "^1.0.4",
     "sequelize": "^6.21.4",
     "simple-git": "^3.7.1",
+    "supervisor": "0.12.0",
     "sqlite3": "^5.0.11",
     "util": "^0.12.4"
   }
