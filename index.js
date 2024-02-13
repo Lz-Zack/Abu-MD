@@ -139,6 +139,7 @@ async function connect(_0x49df9d) {
 }
 
 const WhatsBotConnect = async () => {
+	await connect(session);
 	try {
 		await config.DATABASE.sync();
 		const {
