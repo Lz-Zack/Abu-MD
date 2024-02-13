@@ -1,7 +1,7 @@
 const {
        Module,
        lang,
-       isPublic
+       mode
 } = require('../lib');
 
 
@@ -9,7 +9,7 @@ Module({
     pattern: 'ping ?(.*)',
     desc: lang.PING_DESC,
     react: "💯",
-    fromMe: isPublic,
+    fromMe: mode,
     type: 'info'
 }, async (message, match) => {
     const start = new Date().getTime()
