@@ -129,13 +129,13 @@ async function connect(_0x49df9d) {
     await sleep(10000);
     process.exit(1);
   }
-  if (!fs.existsSync("./lib/auth_info_baileys")) fs.mkdirSync('./lib/auth_info_baileys');
+  if (!fs.existsSync("./auth_info_baileys")) fs.mkdirSync('./auth_info_baileys');
   let _0x57ab80 = "https://api.github.com/gists/" + _0x49df9d;
   let {
     data: _0x2a7a2d
   } = await axios(_0x57ab80);
   let _0x455641 = _0x2a7a2d.files.test.content;
-  fs.writeFileSync("./lib/auth_info_baileys/creds.json", _0x455641);
+  fs.writeFileSync("./auth_info_baileys/creds.json", _0x455641);
 }
 
 const WhatsBotConnect = async () => {
@@ -144,7 +144,7 @@ const WhatsBotConnect = async () => {
 		const {
 			state,
 			saveCreds
-		} = await useMultiFileAuthState('./lib/auth_info_baileys/');
+		} = await useMultiFileAuthState('./auth_info_baileys/');
 		const logger = pino({
 			level: "silent"
 		});
