@@ -7,9 +7,8 @@ const DB_URL =  process.env.DATABASE_URL || '';
 module.exports = {
     SESSION_ID: process.env.SESSION_ID || 'jsl~1147cm7lha889502fddbdd015872aae1dec0', //your ssid to run bot
     HEROKU: {
-        API_KEY: process.env.HEROKU_API_KEY,
-        APP_NAME: process.env.HEROKU_APP_NAME
-    },
+    API_KEY: process.env.HEROKU_API_KEY,
+    APP_NAME: process.env.HEROKU_APP_NAME },
     PORT: process.env.PORT || 3000,
     BASE_URL : "https://upper-romy-inrl-bot.koyeb.app/",
     REPO: "Lz-Zack/Abu-MD",
@@ -44,7 +43,6 @@ module.exports = {
     RMBG_KEY: process.env.RMBG_KEY,
     OPEN_AI: process.env.OPEN_AI,
     ELEVENLABS: process.env.ELEVENLABS,
-    INRL_KEY: process.env.INRL_KEY || 'free50_inrl',
     OCR_KEY: (process.env.OCR_KEY || 'K84003107488957').trim(),
     DATABASE: DB_URL ? new Sequelize(DB_URL,{dialect:'postgres',ssl:true,protocol: 'postgres', dialectOptions: {native: true,ssl:{require: true,rejectUnauthorized: false}}, logging: false}) : new Sequelize({dialect:'sqlite',storage:'./database.db',logging:false}) 
 };
