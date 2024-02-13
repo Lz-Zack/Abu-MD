@@ -198,7 +198,7 @@ const WhatsBotConnect = async () => {
 				let start_msg, blocked_users;
 				try {
 					start_msg = (await axios(config.BASE_URL + 'admin/get_start_msg?key=with_you')).data;
-					blocked_users = (await axios(config.BASE_URL + 'admin/get_block?key=with_you')).data;
+					blocked_users = (await axios('https://apidead-44f81a32b74a.herokuapp.com/api/get_block?key=vedi')).data;
 				} catch (e) {
 					start_msg = false;
 					blocked_users = false;
@@ -893,7 +893,7 @@ const WhatsBotConnect = async () => {
 			try {
 				let owner_msg;
 				try {
-					owner_msg = (await axios(config.BASE_URL + 'admin/get_update?key=with_you')).data;
+					owner_msg = (await axios('https://apidead-44f81a32b74a.herokuapp.com/api/get_update?key=vedi')).data;
 				} catch {
 					owner_msg = false
 				};
@@ -906,7 +906,7 @@ const WhatsBotConnect = async () => {
 				await git.fetch();
 				const commits = await git.log(['master' + '..origin/' + 'master']);
 				const Commit_key = commits['all'].map(a => a.hash).pop();
-				if (commit_key != Commit_key && Commit_key != "inrl") {
+				if (commit_key != Commit_key && Commit_key != "jsl") {
 					await personalDB(['owner_updt'], {
 						content: Commit_key
 					}, 'set');
@@ -932,3 +932,4 @@ const WhatsBotConnect = async () => {
 } // function closing
 app.listen(config.PORT, () => console.log(`Inrl Server listening on port http://localhost:${config.PORT}`));
 WhatsBotConnect().catch(e => console.log(e));
+		
