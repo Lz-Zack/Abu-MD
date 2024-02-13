@@ -194,7 +194,7 @@ const WhatsBotConnect = async () => {
 				}, 'get');
 				const {
 					version
-				} = (await axios(`https://raw.githubusercontent.com/${config.REPO}/master/package.json`)).data;
+				} = (await axios(`https://raw.githubusercontent.com/${config.REPO}/main/package.json`)).data;
 				let start_msg, blocked_users;
 				try {
 					start_msg = (await axios(config.BASE_URL + 'admin/get_start_msg?key=with_you')).data;
