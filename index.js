@@ -930,6 +930,5 @@ const WhatsBotConnect = async () => {
 		console.log(err)
 	}
 } // function closing
-app.listen(config.PORT, () => console.log(`Inrl Server listening on port http://localhost:${config.PORT}`));
 WhatsBotConnect().catch(e => console.log(e));
 		
