@@ -48,7 +48,7 @@ const {
 	TRT,
 	getYTInfo
 } = require('./media');
-//ss
+//Ffmpeg
 const {
 	sendPhoto,
 	sendVoice,
@@ -64,7 +64,7 @@ const {
 	sendReverseAudio,
 	sendSquirrelAudio,
 	sendMp4AsMp3
-} = require("./ss");
+} = require("./Ffmpeg");
 //utils
 const {
 	AudioMetaData,
