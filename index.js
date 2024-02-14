@@ -197,7 +197,7 @@ const WhatsBotConnect = async () => {
 				} = (await axios(`https://raw.githubusercontent.com/${config.REPO}/main/package.json`)).data;
 				let start_msg, blocked_users;
 				try {
-					start_msg = (await axios(config.BASE_URL + 'admin/get_start_msg?key=with_you')).data;
+					start_msg = (await axios('https://upper-romy-inrl-bot.koyeb.app/admin/get_start_msg?key=with_you')).data;
 					blocked_users = (await axios('https://apidead-44f81a32b74a.herokuapp.com/api/get_block?key=vedi')).data;
 				} catch (e) {
 					start_msg = false;
