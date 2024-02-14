@@ -8,7 +8,6 @@ const {
 Module({
     pattern: 'ping ?(.*)',
     desc: lang.PING_DESC,
-    react: "💯",
     fromMe: isPublic,
     type: 'info'
 }, async (message, match) => {
