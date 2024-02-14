@@ -14,5 +14,5 @@ Module({
     const start = new Date().getTime()
     const msg = await message.send('*Testing Bot Speed*')
     const end = new Date().getTime()
-    return await msg.edit('*︎︎⟪ Response in ' + (end - start) + ' ms︎ec ⟫');
+    return await msg.edit('*︎︎⟪ Response in ' + (end - start) + ' ms︎ec ⟫*');
 });
