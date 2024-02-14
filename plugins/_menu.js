@@ -3,6 +3,7 @@ const {
     commands,
     send_alive,
     send_menu,
+    tiny,
     lang,
     personalDB,
     isPublic
@@ -23,7 +24,8 @@ Module({
 			list += `${count++} *${cmd.pattern?cmd.pattern.replace(/[^a-zA-Z0-9,-]/g,""):''}*\n`
 		}
 	}));
-	return await message.send(list);
+	var jsl = await tiny(list)
+	return await message.send(jsl);
 });
 
 Module({
