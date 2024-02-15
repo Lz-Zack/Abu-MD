@@ -247,19 +247,17 @@ const WhatsBotConnect = async () => {
 						await personalDB(['login'], {
 							content: 'true'
 						}, 'set');
-						let start_msg = '```' + `BOT RUNNING HERE ✅\n\n\nVERSION : ${require("./package.json").version}\nPLUGINS : ${commands.length.toString()}\nEXTRA_PLUGINS : ${ext_plugins}\nMODE : ${config.MODE}\nPREFIX : ${config.PREFIX}` + '```\n\n';
+						let start_msg = '```' + `BOT RUNNING HERE ⚠️\nVERSION : ${require("./package.json").version}\nPLUGINS : ${commands.length.toString()}\nEXTRA_PLUGINS : ${ext_plugins}\nMODE : ${config.MODE}\nPREFIX : ${config.PREFIX}` + '```\n\n';
 						for (const key in config) {
 							if (key != 'DATABASE' && key != 'BASE_URL' && key != 'HEROKU' && key != 'SESSION_ID') {
-								start_msg += `_*${key}* : ${config[key] == true ? config[key] +' ✅' : config[key] == false? config[key]+' ❎':config[key]}_\n`;
+								start_msg += `_*${key}* : ${config[key] == true ? config[key] +' ' : config[key] == false? config[key]+' ':config[key]}_\n`;
 							}
 						}
 						await conn.sendMessage(conn.user.id, {
 							text: start_msg
 						})
 					}
-				} else if (shutoff != 'true') await conn.sendMessage(conn.user.id, {
-					text: '_Bot restated_'
-				})
+				} else if (shutoff != 'true') 
 				if (toMessage(config.BGM_URL)) {
 					try {
 						const {
