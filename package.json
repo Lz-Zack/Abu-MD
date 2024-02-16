@@ -14,7 +14,7 @@
     "@adiwajshing/keyed-db": "^0.2.4",
     "@ffmpeg-installer/ffmpeg": "^1.1.0",
     "@vitalets/google-translate-api": "^9.2.0",
-    "@whiskeysockets/baileys": "^6.5.0",
+    "@whiskeysockets/baileys": "git+https://github.com/Galang-Purnama/Baileys.git",
     "node-cron":"3.0.3",
     "awesome-phonenumber": "^2.64.0",
     "axios": "^0.27.2",
