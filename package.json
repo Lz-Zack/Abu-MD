@@ -11,7 +11,7 @@
     "url": "git+https://github.com/Afx-Abu/Abu-MD.git test"
   },
   "dependencies": {
-    "@whiskeysockets/baileys": "git+https://github.com/Lz-Zack/Baileys.xv",
+    "@whiskeysockets/baileys": "git+https://github.com/Lz-Zack/Baileys.xv.git",
     "@adiwajshing/keyed-db": "^0.2.4",
     "@ffmpeg-installer/ffmpeg": "^1.1.0",
     "@vitalets/google-translate-api": "^9.2.0",
